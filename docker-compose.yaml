@@ -10,6 +10,10 @@ services:
       - "80"
     ports:
       - "80:80"
+    networks:
+      inner:
+        aliases:
+          - webserver
   expressapp:
     container_name: expressapp
     build:
@@ -21,5 +25,9 @@ services:
       PORT: "80"
     expose:
       - "80"
-    ports:
-      - "3000:80"
+    networks:
+      inner:
+        aliases:
+          - expressapp
+networks:
+  inner: {}
