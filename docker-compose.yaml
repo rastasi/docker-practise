@@ -29,5 +29,20 @@ services:
       inner:
         aliases:
           - expressapp
+  exampleapi:
+    container_name: exampleapi
+    build:
+      context: ./exampleapi
+      dockerfile: Dockerfile
+    volumes:
+      - ./exampleapi:/usr/src/app
+    environment:
+      PORT: "80"
+    expose:
+      - "80"
+    networks:
+      inner:
+        aliases:
+          - exampleapi
 networks:
   inner: {}
