@@ -44,5 +44,34 @@ services:
       inner:
         aliases:
           - exampleapi
+  mysqlserver:
+    container_name: mysqlserver
+    image: mysql:latest
+    environment:
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: toor
+      MYSQL_DATABASE: testdb
+    expose:
+      - "3306"
+    volumes:
+      - ./mysqldata:/var/lib/mysql
+    networks:
+      inner:
+        aliases:
+          - mysqlserver
+  myadmin:
+    container_name: myadmin
+    image: phpmyadmin/phpmyadmin
+    expose:
+      - 80
+    environment:
+      PMA_USER: root
+      PMA_PASSWORD: toor
+      PMA_HOST: mysqlserver
+    networks:
+      inner:
+        aliases:
+          - myadmin
 networks:
   inner: {}
